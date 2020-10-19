@@ -17,32 +17,32 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private ?\DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $params = [];
+    private array $params = [];
 
     /**
      * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="category")
      */
-    private $offers;
+    private ArrayCollection $offers;
 
     public function __construct()
     {

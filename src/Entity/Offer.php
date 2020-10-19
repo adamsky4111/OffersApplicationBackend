@@ -16,91 +16,91 @@ class Offer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $price;
+    private ?int $price;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isCompany;
+    private ?bool $isCompany;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $images = [];
+    private array $images = [];
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $enablePropositions;
+    private ?bool $enablePropositions;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished = false;
+    private bool $isPublished = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isDeleted = false;
+    private bool $isDeleted = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isEnded = false;
+    private bool $isEnded = false;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private ?\DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $publishedAt;
+    private ?\DateTimeInterface $publishedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    private ?\DateTimeInterface $deletedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $endedAt;
+    private ?\DateTimeInterface $endedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="offers", cascade={"persist"}, fetch="EAGER")
      */
-    private $category;
+    private ?Category $category;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $params = [];
+    private array $params = [];
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+
     }
 
     public function getId(): ?int
