@@ -51,17 +51,17 @@ class Offer
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished;
+    private $isPublished = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isDeleted;
+    private $isDeleted = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isEnded;
+    private $isEnded = false;
 
     /**
      * @ORM\Column(type="datetime")
