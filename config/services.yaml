@@ -32,3 +32,8 @@ services:
     App\EventListener\OfferLifecycleEventSubscriber:
         tags:
             - { name: 'doctrine.event_subscriber' }
+
+    # category lifecycle subscriber
+    App\EventListener\CategoryLifecycleEventSubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
