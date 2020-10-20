@@ -13,11 +13,17 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
     protected string $format = 'json';
     protected string $serializationGroupsPrefix = '';
 
-    public function __construct(SerializerInterface $serializer, $entityName, string $serializationGroupsPrefix)
+    public function __construct(SerializerInterface $serializer, $entityName, string $serializationGroupsPrefix = null)
     {
         $this->serializer = $serializer;
         $this->entityName = $entityName;
-        $this->serializationGroupsPrefix = $serializationGroupsPrefix;
+        if (null !== $serializationGroupsPrefix) {
+            $this->serializationGroupsPrefix = $serializationGroupsPrefix;
+        } else {
+            //Create prefix for serialization groups, for instance, for Category class it generate 'category'
+            $entityBasename = basename(str_replace('\\', '/', $entityName));
+            $this->serializationGroupsPrefix = strtolower($entityBasename);
+        }
     }
 
     public function entitiesToJson(array $data)
@@ -26,7 +32,11 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
             return;
         }
 
-        return $this->serializer->serialize($data, 'json', ['groups' => 'list_'.$this->serializationGroupsPrefix]);
+        return $this->serializer->serialize(
+            $data,
+            $this->format,
+            ['groups' => $this->serializationGroupsPrefix.'_list', 'ids']
+        );
     }
 
     public function entityToJson(BaseEntity $data)
@@ -38,7 +48,7 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
         return $this->serializer->serialize(
             $data,
             $this->format,
-            ['groups' => 'show_'.$this->serializationGroupsPrefix]
+            ['groups' => $this->serializationGroupsPrefix.'_show', 'ids']
         );
     }
 
