@@ -10,15 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=OfferRepository::class)
  */
-class Offer
+class Offer extends BaseEntity
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
-
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -107,11 +100,6 @@ class Offer
     public function __construct()
     {
         $this->propositions = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getTitle(): ?string

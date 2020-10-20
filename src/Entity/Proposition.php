@@ -8,15 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PropositionRepository::class)
  */
-class Proposition
+class Proposition extends BaseEntity
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
-
     /**
      * @ORM\Column(type="integer")
      */
@@ -32,11 +25,6 @@ class Proposition
      * @ORM\JoinColumn(nullable=false)
      */
     private ?Offer $offer;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getPrice(): ?int
     {
