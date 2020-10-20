@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace App\Utils\EntitySerializers;
 
 use App\Entity\Offer;
 use Symfony\Component\Serializer\SerializerInterface;
