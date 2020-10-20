@@ -2,28 +2,17 @@
 
 namespace App\Utils;
 
-use App\Entity\BaseEntity;
 use Symfony\Component\Serializer\SerializerInterface;
 
-abstract class AbstractEntitySerializer
+abstract class AbstractEntitySerializer implements EntitySerializerInterface
 {
     protected SerializerInterface $serializer;
     protected string $entityName;
+    protected string $format = 'json';
 
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer, $entityName)
     {
         $this->serializer = $serializer;
-    }
-
-    public function entitiesToJson(array $data)
-    {
-    }
-
-    public function entityToJson(BaseEntity $data)
-    {
-    }
-
-    public function jsonToEntity(string $data)
-    {
+        $this->entityName = $entityName;
     }
 }
