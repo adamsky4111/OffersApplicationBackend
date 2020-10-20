@@ -12,5 +12,5 @@ interface SerializerServiceInterface
 
     public function serializeObject(object $data);
 
-    public function deserializeObject(string $data);
+    public function deserializeObject(string $data, $entityName);
 }
