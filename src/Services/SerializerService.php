@@ -13,6 +13,12 @@ use App\Utils\EntitySerializers\OfferSerializer;
 use App\Utils\EntitySerializers\PropositionSerializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
+/**
+ * Class SerializerService
+ * This is class for handle serialization of entities in application.
+ * It uses serializers in App\Utils\EntitySerializers for specific serialization.
+ * It's based on Strategy pattern to set up serialization strategy based on entry entity.
+ */
 class SerializerService implements SerializerServiceInterface
 {
     private SerializerInterface $serializer;
@@ -29,6 +35,7 @@ class SerializerService implements SerializerServiceInterface
         ];
     }
 
+    // method for serialize entry entities in array.=
     public function serializeList(array $data)
     {
         $entityName = get_class($data[0]);
@@ -37,6 +44,7 @@ class SerializerService implements SerializerServiceInterface
         return $this->serializationStrategy->entitiesToJson($data);
     }
 
+    // method for serialize single entity
     public function serializeObject(BaseEntity $data)
     {
         $entityName = get_class($data);
@@ -45,6 +53,7 @@ class SerializerService implements SerializerServiceInterface
         return $this->serializationStrategy->entityToJson($data);
     }
 
+    // method to deserialize entity
     public function deserializeObject(string $data, $entityName)
     {
         $this->setSerializationStrategyByEntityName($entityName);
@@ -52,6 +61,7 @@ class SerializerService implements SerializerServiceInterface
         return $this->serializationStrategy->jsonToEntity($data);
     }
 
+    // private function to set strategy based on className property passed by parameter
     private function setSerializationStrategyByEntityName($className)
     {
         $this->serializationStrategy = $this->serializationStrategies[$className];
