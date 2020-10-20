@@ -35,7 +35,7 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
         return $this->serializer->serialize(
             $data,
             $this->format,
-            ['groups' => $this->serializationGroupsPrefix.'_list', 'ids']
+            ['groups' => [$this->serializationGroupsPrefix.'_list', 'ids']]
         );
     }
 
@@ -48,7 +48,7 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
         return $this->serializer->serialize(
             $data,
             $this->format,
-            ['groups' => $this->serializationGroupsPrefix.'_show', 'ids']
+            ['groups' => [$this->serializationGroupsPrefix.'_show', 'ids']]
         );
     }
 
