@@ -2,6 +2,7 @@
 
 namespace App\Services\Interfaces;
 
+use App\Entity\BaseEntity;
 use Symfony\Component\Serializer\SerializerInterface;
 
 interface SerializerServiceInterface
@@ -10,7 +11,7 @@ interface SerializerServiceInterface
 
     public function serializeList(array $data);
 
-    public function serializeObject(object $data);
+    public function serializeObject(BaseEntity $data);
 
     public function deserializeObject(string $data, $entityName);
 }

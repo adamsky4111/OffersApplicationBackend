@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
+use App\Entity\BaseEntity;
 use App\Entity\Category;
 use App\Entity\Offer;
 use App\Entity\Proposition;
 use App\Services\Interfaces\SerializerServiceInterface;
-use App\Utils\AbstractEntitySerializer;
-use App\Utils\CategorySerializer;
-use App\Utils\OfferSerializer;
-use App\Utils\PropositionSerializer;
+use App\Utils\EntitySerializers\AbstractEntitySerializer;
+use App\Utils\EntitySerializers\CategorySerializer;
+use App\Utils\EntitySerializers\OfferSerializer;
+use App\Utils\EntitySerializers\PropositionSerializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SerializerService implements SerializerServiceInterface
@@ -30,24 +31,29 @@ class SerializerService implements SerializerServiceInterface
 
     public function serializeList(array $data)
     {
-        $className = get_class($data[0]);
-        $this->setStrategy($this->serializationStrategies[$className]);
+        $entityName = get_class($data[0]);
+        $this->setSerializationStrategyByEntityName($entityName);
 
         return $this->serializationStrategy->entitiesToJson($data);
     }
 
-    private function setStrategy(AbstractEntitySerializer $strategy)
+    public function serializeObject(BaseEntity $data)
     {
-        $this->serializationStrategy = $strategy;
-    }
+        $entityName = get_class($data);
+        $this->setSerializationStrategyByEntityName($entityName);
 
-    public function serializeObject(object $data)
-    {
-        // TODO: Implement serializeObject() method.
+        return $this->serializationStrategy->entityToJson($data);
     }
 
     public function deserializeObject(string $data, $entityName)
     {
-        // TODO: Implement deserializeObject() method.
+        $this->setSerializationStrategyByEntityName($entityName);
+
+        return $this->serializationStrategy->jsonToEntity($data);
+    }
+
+    private function setSerializationStrategyByEntityName($className)
+    {
+        $this->serializationStrategy = $this->serializationStrategies[$className];
     }
 }
