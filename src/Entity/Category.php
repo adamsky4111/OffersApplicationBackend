@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -14,21 +15,25 @@ class Category extends BaseEntity
 {
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"category_show", "category_list", "offer_list"})
      */
     private ?string $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"category_show", "category_list"})
      */
     private ?\DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"category_show", "category_list"})
      */
     private ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="array")
+     * @Groups({"category_show", "category_list"})
      */
     private array $params = [];
 

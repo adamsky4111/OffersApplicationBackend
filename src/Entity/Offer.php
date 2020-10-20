@@ -6,6 +6,7 @@ use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OfferRepository::class)
@@ -14,81 +15,98 @@ class Offer extends BaseEntity
 {
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?string $title;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?int $price;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"offer_show"})
      */
     private ?string $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?bool $isCompany;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"offer_show"})
      */
     private array $images = [];
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?bool $enablePropositions;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"offer_show", "offer_list"})
      */
     private bool $isPublished = false;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"offer_show", "offer_list"})
      */
     private bool $isDeleted = false;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"offer_show", "offer_list"})
      */
     private bool $isEnded = false;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?\DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"offer_show", "offer_list"})
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?\DateTimeInterface $publishedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?\DateTimeInterface $deletedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?\DateTimeInterface $endedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="offers", cascade={"persist"}, fetch="EAGER")
+     * @Groups({"offer_show", "offer_list"})
      */
     private ?Category $category;
 
     /**
      * @ORM\Column(type="array")
+     * @Groups({"offer_show"})
      */
     private array $params = [];
 
