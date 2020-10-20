@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -98,9 +99,14 @@ class Offer
      */
     private array $params = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Proposition::class, mappedBy="offer", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
+     */
+    private Collection $propositions;
+
     public function __construct()
     {
-
+        $this->propositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -296,6 +302,37 @@ class Offer
     public function setParams(array $params): self
     {
         $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Proposition[]
+     */
+    public function getPropositions(): Collection
+    {
+        return $this->propositions;
+    }
+
+    public function addProposition(Proposition $proposition): self
+    {
+        if (!$this->propositions->contains($proposition)) {
+            $this->propositions[] = $proposition;
+            $proposition->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposition(Proposition $proposition): self
+    {
+        if ($this->propositions->contains($proposition)) {
+            $this->propositions->removeElement($proposition);
+            // set the owning side to null (unless already changed)
+            if ($proposition->getOffer() === $this) {
+                $proposition->setOffer(null);
+            }
+        }
 
         return $this;
     }

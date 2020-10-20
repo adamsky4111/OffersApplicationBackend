@@ -27,6 +27,12 @@ class Proposition
      */
     private ?\DateTimeInterface $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Offer::class, inversedBy="propositions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Offer $offer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,5 +60,22 @@ class Proposition
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?Offer $offer): self
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return strval($this->price);
     }
 }

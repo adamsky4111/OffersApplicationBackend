@@ -42,7 +42,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="category")
      */
-    private ArrayCollection $offers;
+    private Collection $offers;
 
     public function __construct()
     {
