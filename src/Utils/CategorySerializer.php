@@ -9,6 +9,6 @@ class CategorySerializer extends AbstractEntitySerializer
 {
     public function __construct(SerializerInterface $serializer)
     {
-        parent::__construct($serializer, Category::class, 'category');
+        parent::__construct($serializer, Category::class);
     }
 }
