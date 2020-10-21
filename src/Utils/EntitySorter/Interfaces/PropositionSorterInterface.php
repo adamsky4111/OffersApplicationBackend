@@ -4,9 +4,9 @@ namespace App\Utils\EntitySorter\Interfaces;
 
 interface PropositionSorterInterface
 {
-    public function getSortedByCreatedAt(bool $desc = false);
+    public function getSortedByCreatedAt(array $data, bool $desc = false);
 
-    public function getSortedByUpdatedAt(bool $desc = false);
+    public function getSortedByUpdatedAt(array $data, bool $desc = false);
 
-    public function getSortedByPrice(bool $desc = false);
+    public function getSortedByPrice(array $data, bool $desc = false);
 }
