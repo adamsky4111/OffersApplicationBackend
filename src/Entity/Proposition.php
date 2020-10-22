@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\PropositionRepository;
+use App\Repository\Doctrine\PropositionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
