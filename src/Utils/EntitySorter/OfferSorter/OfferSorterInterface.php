@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\EntitySorter\Interfaces;
+namespace App\Utils\EntitySorter\OfferSorter;
 
 interface OfferSorterInterface
 {
