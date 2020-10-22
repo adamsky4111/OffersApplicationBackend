@@ -4,9 +4,9 @@ namespace App\Utils\EntityCollectors\OfferCollector;
 
 use App\Repository\Current\OfferRepository\OfferRepositoryInterface;
 
-class OfferCollector implements OfferCollectorInterface
+final class OfferCollector implements OfferCollectorInterface
 {
-    protected OfferRepositoryInterface $repository;
+    private OfferRepositoryInterface $repository;
 
     public function __construct(OfferRepositoryInterface $repository)
     {
