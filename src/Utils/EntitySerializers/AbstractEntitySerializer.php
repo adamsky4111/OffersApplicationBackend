@@ -36,7 +36,7 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
     }
 
     // generic many entities to json, serialization groups is based on parameters passed by construct
-    public function entitiesToJson(array $data)
+    public function entitiesToJson($data)
     {
         if (!($data[0] instanceof $this->entityName)) {
             return;
