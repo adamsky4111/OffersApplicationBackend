@@ -10,7 +10,7 @@ interface CategoryRepositoryInterface
 
     public function remove(BaseEntity $entity);
 
-    public function getOne($id);
+    public function findOne($id);
 
-    public function getAllActive();
+    public function findAllActive();
 }
