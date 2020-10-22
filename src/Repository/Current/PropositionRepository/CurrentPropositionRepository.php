@@ -17,12 +17,12 @@ final class CurrentPropositionRepository extends AbstractRepository implements P
         parent::__construct($em, Proposition::class);
     }
 
-    public function getOne($id)
+    public function findOne($id)
     {
         return $this->repository->find($id);
     }
 
-    public function getAllActive()
+    public function findAllActive()
     {
         return $this->repository->findAllActive();
     }
