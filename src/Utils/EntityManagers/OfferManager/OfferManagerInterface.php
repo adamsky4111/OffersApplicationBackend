@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Utils\EntityManagements\Interfaces;
+namespace App\Utils\EntityManagers\OfferManager;
 
 use App\Entity\Offer;
 
-interface OfferManagementInterface
+interface OfferManagerInterface
 {
-    public function add(Offer $offer);
+    public function create(Offer $offer);
 
     public function update(Offer $offer);
 
@@ -16,5 +16,5 @@ interface OfferManagementInterface
 
     public function end(Offer $offer);
 
-    public function checkActive(Offer $offer);
+    public function activate(Offer $offer);
 }
