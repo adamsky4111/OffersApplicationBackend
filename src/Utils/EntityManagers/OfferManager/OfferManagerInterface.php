@@ -16,5 +16,5 @@ interface OfferManagerInterface
 
     public function end(Offer $offer);
 
-    public function activate(Offer $offer);
+    public function reActivate(Offer $offer);
 }
