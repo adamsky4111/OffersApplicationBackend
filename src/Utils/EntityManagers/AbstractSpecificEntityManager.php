@@ -15,28 +15,44 @@ use Doctrine\ORM\EntityManagerInterface;
 abstract class AbstractSpecificEntityManager
 {
     protected EntityManagerInterface $em;
-
+    protected ?BaseEntity $entity = null;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
 
-    public function create(BaseEntity $entity)
+    public function setEntity($entity)
     {
-        $this->em->persist($entity);
+        $this->entity = $entity;
+
+        return $this;
+    }
+
+    public function create()
+    {
+        $this->em->persist($this->entity);
         $this->em->flush();
     }
 
-    public function update(BaseEntity $entity)
+    public function update()
     {
-        $this->em->persist($entity);
+        $this->em->persist($this->entity);
         $this->em->flush();
     }
 
-    public function delete(BaseEntity $category)
+    public function delete()
     {
-        $this->em->remove($category);
+        $this->em->remove($this->entity);
         $this->em->flush();
+    }
+
+    public function dataIsSet()
+    {
+        if (null === $this->entity) {
+            return false;
+        }
+
+        return true;
     }
 }
