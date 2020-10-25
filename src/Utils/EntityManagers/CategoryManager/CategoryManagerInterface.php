@@ -6,7 +6,7 @@ use App\Entity\Category;
 
 interface CategoryManagerInterface
 {
-    public function setEntity(Category $offer);
+    public function setEntity(Category $category);
 
     public function create();
 
