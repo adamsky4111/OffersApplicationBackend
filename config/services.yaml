@@ -20,6 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+            - '../src/Utils/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -29,3 +30,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # offer lifecycle subscriber
+    App\EventListener\OfferLifecycleEventSubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+
+    # category lifecycle subscriber
+    App\EventListener\CategoryLifecycleEventSubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+
+    # proposition lifecycle subscriber
+    App\EventListener\PropositionLifecycleEventSubscriber:
+        tags:
+            - {name: 'doctrine.event_subscriber' }
