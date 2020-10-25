@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Utils\EntityManagements\Interfaces;
+namespace App\Utils\EntityManagers\CategoryManager;
 
 use App\Entity\Category;
 
-interface CategoryManagementInterface
+interface CategoryManagerInterface
 {
     public function add(Category $category);
 
