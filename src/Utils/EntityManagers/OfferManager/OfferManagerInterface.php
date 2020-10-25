@@ -6,15 +6,17 @@ use App\Entity\Offer;
 
 interface OfferManagerInterface
 {
-    public function create(Offer $offer);
+    public function setEntity(Offer $offer);
 
-    public function update(Offer $offer);
+    public function create();
 
-    public function delete(Offer $offer);
+    public function update();
 
-    public function publish(Offer $offer);
+    public function delete();
 
-    public function end(Offer $offer);
+    public function publish();
 
-    public function reActivate(Offer $offer);
+    public function end();
+
+    public function reActivate();
 }
