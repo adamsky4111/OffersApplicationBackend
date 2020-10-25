@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Utils\EntitySorter\Interfaces;
+namespace App\Utils\EntitySorter\CategorySorter;
 
 interface CategorySorterInterface
 {
-    public function getSortedByCreatedAt(array $data, bool $desc = false);
+    public function sortByCreatedAt(array $data, bool $desc = false);
 
-    public function getSortedByUpdatedAt(array $data, bool $desc = false);
+    public function sortByUpdatedAt(array $data, bool $desc = false);
 
-    public function getSortedByName(array $data, bool $desc = false);
+    public function sortByName(array $data, bool $desc = false);
+
+    public function getResult();
 }
