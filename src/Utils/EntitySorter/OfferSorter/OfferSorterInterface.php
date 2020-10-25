@@ -4,13 +4,15 @@ namespace App\Utils\EntitySorter\OfferSorter;
 
 interface OfferSorterInterface
 {
-    public function getSortedByCreatedAt(array $data, bool $desc = false);
+    public function sortByCreatedAt(array $data, bool $desc = false);
 
-    public function getSortedByUpdatedAt(array $data, bool $desc = false);
+    public function sortByUpdatedAt(array $data, bool $desc = false);
 
-    public function getSortedByPrice(array $data, bool $desc = false);
+    public function sortByPrice(array $data, bool $desc = false);
 
-    public function getSortedByTitle(array $data, bool $desc = false);
+    public function sortByTitle(array $data, bool $desc = false);
 
-    public function getSortedByCategoryName(array $data, bool $desc = false);
+    public function sortByCategoryName(array $data, bool $desc = false);
+
+    public function getResult();
 }
