@@ -6,31 +6,35 @@ use App\Utils\EntitySorter\AbstractEntitySorter;
 
 class OfferSorter extends AbstractEntitySorter implements OfferSorterInterface
 {
-    public function getSortedByCreatedAt(array $data, bool $desc = false)
+    public function sortByCreatedAt(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'createdAt', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'createdAt', $desc);
+
+        return $this;
     }
 
-    public function getSortedByUpdatedAt(array $data, bool $desc = false)
+    public function sortByUpdatedAt(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'updatedAt', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'updatedAt', $desc);
+
+        return $this;
     }
 
-    public function getSortedByPrice(array $data, bool $desc = false)
+    public function sortByPrice(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'price', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'price', $desc);
+
+        return $this;
     }
 
-    public function getSortedByTitle(array $data, bool $desc = false)
+    public function sortByTitle(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'title', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'title', $desc);
+
+        return $this;
     }
 
-    public function getSortedByCategoryName(array $data, bool $desc = false)
+    public function sortByCategoryName(array $data, bool $desc = false)
     {
         // TODO: Implement getSortedByCategoryName() method.
     }

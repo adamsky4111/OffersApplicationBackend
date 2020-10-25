@@ -3,25 +3,27 @@
 namespace App\Utils\EntitySorter\PropositionSorter;
 
 use App\Utils\EntitySorter\AbstractEntitySorter;
-use App\Utils\EntitySorter\Interfaces\PropositionSorterInterface;
 
 class PropositionSorter extends AbstractEntitySorter implements PropositionSorterInterface
 {
-    public function getSortedByCreatedAt(array $data, bool $desc = false)
+    public function sortByCreatedAt(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'createdAt', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'createdAt', $desc);
+
+        return $this;
     }
 
-    public function getSortedByUpdatedAt(array $data, bool $desc = false)
+    public function sortByUpdatedAt(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'updatedAt', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'updatedAt', $desc);
+
+        return $this;
     }
 
-    public function getSortedByPrice(array $data, bool $desc = false)
+    public function sortByPrice(array $data, bool $desc = false)
     {
-        return $this->setDataAndOneSort($data, 'price', $desc)
-            ->getResult();
+        $this->setDataAndOneSort($data, 'price', $desc);
+
+        return $this;
     }
 }
