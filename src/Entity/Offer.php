@@ -115,6 +115,21 @@ class Offer extends BaseEntity
      */
     private Collection $propositions;
 
+    public function __clone()
+    {
+        $this->id = null;
+        $this->propositions = new ArrayCollection();
+        $this->endedAt = null;
+        $this->isEnded = false;
+        $this->createdAt = new \DateTime('now');
+        $this->updatedAt = null;
+    }
+
+    public function reActive()
+    {
+        return clone $this;
+    }
+
     public function __construct()
     {
         $this->propositions = new ArrayCollection();
