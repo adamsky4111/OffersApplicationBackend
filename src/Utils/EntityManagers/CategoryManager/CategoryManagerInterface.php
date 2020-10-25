@@ -6,9 +6,11 @@ use App\Entity\Category;
 
 interface CategoryManagerInterface
 {
-    public function add(Category $category);
+    public function setEntity(Category $offer);
 
-    public function update(Category $category);
+    public function create();
 
-    public function delete(Category $category);
+    public function update();
+
+    public function delete();
 }
