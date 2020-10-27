@@ -8,6 +8,7 @@ use App\Services\ValidationService\ValidationServiceInterface;
 use App\Utils\EntityCollectors\CategoryCollector\CategoryCollectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -111,6 +112,31 @@ class OfferController extends AbstractController
         $data = $this->offerService->serialize()->entityToJson($data);
 
         return JsonResponse::fromJsonString($data, Response::HTTP_FOUND);
+    }
+
+    /**
+     * @Route("/new", name="new", methods={"POST"})
+     *
+     * @return JsonResponse
+     */
+    public function new(Request $request, CategoryCollectorInterface $categoryCollector)
+    {
+        $json = $request->getContent();
+        /**
+         * @var Offer $offer
+         */
+        $offer = $this->updateOrCreate($json, $categoryCollector);
+
+        if ($offer instanceof JsonResponse) {
+            return $offer;
+        }
+        $offer->setCreatedAt(new \DateTime('now'));
+
+        $this->offerService->manage()->setEntity($offer)->create();
+
+        $json = $this->offerService->serialize()->entityToJson($offer);
+
+        return JsonResponse::fromJsonString($json, Response::HTTP_CREATED);
     }
 
     private function updateOrCreate($json, CategoryCollectorInterface $categoryCollector, Offer $existingOffer = null)
