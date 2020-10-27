@@ -20,7 +20,7 @@ class OfferLifecycleEventSubscriber implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        if (!$entity instanceof Offer) {
+        if ($entity instanceof Offer) {
             $entity->setCreatedAt(new \DateTime('now'));
         }
 
@@ -30,7 +30,7 @@ class OfferLifecycleEventSubscriber implements EventSubscriber
     public function preUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        if (!$entity instanceof Offer) {
+        if ($entity instanceof Offer) {
             $entity->setUpdatedAt(new \DateTime('now'));
         }
 
