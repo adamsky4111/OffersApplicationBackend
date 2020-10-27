@@ -139,6 +139,31 @@ class OfferController extends AbstractController
         return JsonResponse::fromJsonString($json, Response::HTTP_CREATED);
     }
 
+    /**
+     * @Route("/update/{id}", name="update", methods={"PUT"})
+     *
+     * @return JsonResponse
+     */
+    public function update(Request $request, CategoryCollectorInterface $categoryCollector, $id)
+    {
+        $json = $request->getContent();
+        /**
+         * @var Offer $offer
+         */
+        $existingOffer = $this->offerService->collect()->getOne($id);
+
+        $offer = $this->updateOrCreate($json, $categoryCollector, $existingOffer);
+
+        if ($offer instanceof JsonResponse) {
+            return $offer;
+        }
+
+        $this->offerService->manage()->setEntity($offer)->update();
+        $json = $this->offerService->serialize()->entityToJson($offer);
+
+        return JsonResponse::fromJsonString($json, Response::HTTP_CREATED);
+    }
+
     private function updateOrCreate($json, CategoryCollectorInterface $categoryCollector, Offer $existingOffer = null)
     {
         /**
