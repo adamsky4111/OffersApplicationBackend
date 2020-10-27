@@ -34,4 +34,20 @@ class OfferController extends AbstractController
 
         return JsonResponse::fromJsonString($data, Response::HTTP_FOUND);
     }
+
+    /**
+     * @Route ("/{id}", methods={"GET"})
+     */
+    public function show($id)
+    {
+        $data = $this->offerService->collect()->getOne($id);
+
+        if (null === $data) {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+
+        $data = $this->offerService->serialize()->entityToJson($data);
+
+        return JsonResponse::fromJsonString($data, Response::HTTP_FOUND);
+    }
 }
