@@ -22,4 +22,9 @@ class CategoryCollector implements CategoryCollectorInterface
     {
         return $this->repository->findAllActive();
     }
+
+    public function getOneByName($name)
+    {
+        return $this->repository->findOneByName($name);
+    }
 }

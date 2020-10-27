@@ -13,4 +13,6 @@ interface CategoryRepositoryInterface
     public function findOne($id);
 
     public function findAllActive();
+
+    public function findOneByName($name);
 }

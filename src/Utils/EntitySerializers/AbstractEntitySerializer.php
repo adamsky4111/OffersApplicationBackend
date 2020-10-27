@@ -4,6 +4,7 @@ namespace App\Utils\EntitySerializers;
 
 use App\Entity\BaseEntity;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -64,13 +65,18 @@ abstract class AbstractEntitySerializer implements EntitySerializerInterface
     }
 
     // generic json to entity
-    public function jsonToEntity(string $data)
+    public function jsonToEntity(string $data, BaseEntity $entity = null)
     {
+        $options[AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES] = true;
+        if (null !== $entity) {
+            $options[AbstractNormalizer::OBJECT_TO_POPULATE] = $entity;
+        }
+
         return $this->serializer->deserialize(
             $data,
             $this->entityName,
             $this->format,
-            [AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false]
+            $options,
         );
     }
 }

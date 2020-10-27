@@ -26,4 +26,9 @@ final class CurrentCategoryRepository extends AbstractRepository implements Cate
     {
         return $this->repository->findAllActive();
     }
+
+    public function findOneByName($name)
+    {
+        return $this->repository->findOneBy(['name' => $name]);
+    }
 }

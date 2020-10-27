@@ -6,6 +6,7 @@ use App\Repository\Doctrine\OfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -16,24 +17,36 @@ class Offer extends BaseEntity
     /**
      * @ORM\Column(type="string", length=100)
      * @Groups({"offer_show", "offer_list"})
+     * @Assert\NotBlank(
+     *     message = "title is required"
+     * )
      */
     private ?string $title;
 
     /**
      * @ORM\Column(type="integer")
      * @Groups({"offer_show", "offer_list"})
+     * @Assert\NotBlank(
+     *     message = "price is required"
+     * )
      */
     private ?int $price;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"offer_show"})
+     * @Assert\NotBlank(
+     *     message = "description is required"
+     * )
      */
     private ?string $description;
 
     /**
      * @ORM\Column(type="boolean")
      * @Groups({"offer_show", "offer_list"})
+     * @Assert\NotNull(
+     *     message = "define company or not is required"
+     * )
      */
     private ?bool $isCompany;
 
@@ -46,6 +59,9 @@ class Offer extends BaseEntity
     /**
      * @ORM\Column(type="boolean")
      * @Groups({"offer_show", "offer_list"})
+     * @Assert\NotNull(
+     *     message = "enable/disable propositions is required"
+     * )
      */
     private ?bool $enablePropositions;
 
@@ -77,30 +93,34 @@ class Offer extends BaseEntity
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"offer_show", "offer_list"})
      */
-    private ?\DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"offer_show", "offer_list"})
      * @Groups({"offer_show", "offer_list"})
      */
-    private ?\DateTimeInterface $publishedAt;
+    private ?\DateTimeInterface $publishedAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"offer_show", "offer_list"})
      */
-    private ?\DateTimeInterface $deletedAt;
+    private ?\DateTimeInterface $deletedAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"offer_show", "offer_list"})
      */
-    private ?\DateTimeInterface $endedAt;
+    private ?\DateTimeInterface $endedAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="offers", cascade={"persist"}, fetch="EAGER")
      * @Groups({"offer_show", "offer_list"})
+     * @Assert\Valid
+     * @Assert\NotBlank(
+     *     message="Category is required"
+     * )
      */
     private ?Category $category;
 

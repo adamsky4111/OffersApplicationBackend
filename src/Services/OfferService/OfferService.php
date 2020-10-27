@@ -30,27 +30,27 @@ class OfferService implements OfferServiceInterface
         $this->serializer = $serializer;
     }
 
-    public function collect()
+    public function collect(): OfferCollectorInterface
     {
         return $this->collector;
     }
 
-    public function filter()
+    public function filter(): OfferFilterInterface
     {
         return $this->filter;
     }
 
-    public function sort()
+    public function sort(): OfferSorterInterface
     {
         return $this->sorter;
     }
 
-    public function serialize()
+    public function serialize(): OfferSerializer
     {
         return $this->serializer;
     }
 
-    public function manage()
+    public function manage(): OfferManagerInterface
     {
         return $this->manager;
     }

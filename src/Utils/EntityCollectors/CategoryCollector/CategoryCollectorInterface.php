@@ -10,5 +10,7 @@ interface CategoryCollectorInterface
 
     public function getOne($id);
 
+    public function getOneByName($name);
+
     public function getAllActive();
 }
