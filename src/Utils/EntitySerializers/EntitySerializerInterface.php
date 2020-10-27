@@ -10,5 +10,5 @@ interface EntitySerializerInterface
 
     public function entityToJson(BaseEntity $data);
 
-    public function jsonToEntity(string $data);
+    public function jsonToEntity(string $data, BaseEntity $entity = null);
 }
