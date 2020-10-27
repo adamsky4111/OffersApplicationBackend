@@ -2,8 +2,10 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Offer;
 use App\Services\OfferService\OfferServiceInterface;
 use App\Services\ValidationService\ValidationServiceInterface;
+use App\Utils\EntityCollectors\CategoryCollector\CategoryCollectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,5 +111,29 @@ class OfferController extends AbstractController
         $data = $this->offerService->serialize()->entityToJson($data);
 
         return JsonResponse::fromJsonString($data, Response::HTTP_FOUND);
+    }
+
+    private function updateOrCreate($json, CategoryCollectorInterface $categoryCollector, Offer $existingOffer = null)
+    {
+        /**
+         * @var Offer $offer
+         */
+        $offer = $this->offerService->serialize()->jsonToEntity($json, $existingOffer);
+        $errors = $this->validator->validate($offer);
+
+        if (null !== $errors) {
+            return new JsonResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $categoryName = $offer->getCategory()->getName();
+        $category = $categoryCollector->getOneByName($categoryName);
+
+        if (null === $category) {
+            return new JsonResponse(['errors' => ['Could not find category with '.$categoryName.' name']], Response::HTTP_NOT_FOUND);
+        }
+
+        $offer->setCategory($category);
+
+        return $offer;
     }
 }
